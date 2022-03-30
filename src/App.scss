@@ -1,0 +1,45 @@
+.GLWN {
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		/* 62.5% of 16px base font size is 10px */
+		font-size: 62.5%;
+	}
+
+	body {
+		font-size: 1.6rem; //equivalent to 16px
+	}
+
+	h1 {
+		color: rgb(82, 82, 82);
+		font-size: 3em;
+		text-align: center;
+	}
+
+	.nav {
+		list-style: none;
+		display: flex;
+		padding: 0;
+		justify-content: center;
+	}
+
+	.nav__item {
+		button, &--active button {
+			cursor: pointer;
+			padding: 1rem;
+			font-size: 2rem;
+			color: rgb(141, 141, 141);
+		}
+		&--active button {
+			background: yellow;
+		}
+	}
+
+	.screen {
+		text-align: center;
+		font-size: 4em;
+		color: #FFF;
+	}
+}
