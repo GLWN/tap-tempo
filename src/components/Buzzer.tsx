@@ -1,9 +1,9 @@
 import { timeStamp } from 'console';
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, SyntheticEvent, useState } from 'react'
 // import { setInterval } from 'timers';
 
 interface BuzzerProps {
-    clickDelegation: (tempo: number) => void;
+    clickDelegation: (e: SyntheticEvent, tempo: number) => void;
 }
 
 const Buzzer:FC<BuzzerProps> = ({clickDelegation}) => {
@@ -71,7 +71,8 @@ const Buzzer:FC<BuzzerProps> = ({clickDelegation}) => {
             const b = (ySum * xxSum - xSum * xySum) / xx;  // Intercept
             let tempo = Number((60000 / a).toFixed(3));
             tempo = Math.round(tempo);
-            console.log( tempo + " BPM");
+            console.log(tempo + " BPM");
+            clickDelegation(e, tempo);
             
             periodPrev = period;
             aPrev = a;
@@ -85,6 +86,7 @@ const Buzzer:FC<BuzzerProps> = ({clickDelegation}) => {
 
     useEffect(() => {
         window.addEventListener('keydown', e => handleTap(e));
+        return window.removeEventListener('keydown', e => handleTap(e));
     });
 
     return(

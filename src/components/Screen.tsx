@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
-interface IScreen {
+interface ScreenProps {
     display: number;
 }
 
-const Screen: FC<IScreen> = (props) => {
+const Screen: FC<ScreenProps> = (props) => {
     return(
         <div className='screen'>
             {props.display}
