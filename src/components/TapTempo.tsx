@@ -4,14 +4,14 @@ import Screen from './Screen'
 const TapTempo:FC = () => {
 
     const [tempo, setTempo] = useState<number>(0);
-    // const [reset, setReset] = useState<boolean>(false);
     const [beatTimes, setBeatTimes] = useState<number[]>([]);
+
+    const MAX_TIMELEFT = 2000; // max time between two taps
 
     // ********************** //
     // linear regression variables
     // ********************** //
 
-    // let beatTimes: number[] = [];
     let xSum: number  = 0;
     let xxSum: number = 0;
     let ySum: number  = 0;
@@ -21,10 +21,11 @@ const TapTempo:FC = () => {
     let aPrev: number = 0;
     let bPrev: number = 0;
 
+
+
     // ********************** //
 
     const handleReset = () => {
-        // beatTimes.length = 0;
         xSum  = 0;
         xxSum = 0;
         ySum  = 0;
@@ -36,10 +37,10 @@ const TapTempo:FC = () => {
 
         setBeatTimes(() => []);
         setTempo(0);
-
+        
         console.clear();
     };
-
+    
     const handleTap = (e: any) => {
         e.preventDefault();
         e.stopPropagation();
@@ -65,6 +66,12 @@ const TapTempo:FC = () => {
         // Coordinates for linear regression
         const x = n - 1;
         const y = beatTimes[n - 1] - beatTimes[0];
+
+        // Reset tempo if times between two taps exceed MAX_TIMELEFT
+        if(beatTimes[x] - beatTimes[x - 1] > MAX_TIMELEFT) {
+            handleReset();
+            return;
+        }
 
         // Regression cumulative variables
         xSum  += x;
