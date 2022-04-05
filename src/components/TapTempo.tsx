@@ -5,8 +5,9 @@ const TapTempo:FC = () => {
 
     const [tempo, setTempo] = useState<number>(0);
     const [beatTimes, setBeatTimes] = useState<number[]>([]);
+    const [pulse, setPulse] = useState<boolean>(false);
 
-    const MAX_TIMELEFT = 2000; // max time between two taps
+    const MAX_TIME = 2000; // max time between two taps
 
     // ********************** //
     // linear regression variables
@@ -20,8 +21,6 @@ const TapTempo:FC = () => {
     let periodPrev: number = 0;
     let aPrev: number = 0;
     let bPrev: number = 0;
-
-
 
     // ********************** //
 
@@ -37,14 +36,12 @@ const TapTempo:FC = () => {
 
         setBeatTimes(() => []);
         setTempo(0);
-        
-        console.clear();
     };
     
     const handleTap = (e: any) => {
         e.preventDefault();
         e.stopPropagation();
-
+        setPulse(false);
         setBeatTimes(beatTimes => [...beatTimes, Date.now()]);
     };
 
@@ -61,14 +58,16 @@ const TapTempo:FC = () => {
     // https://www.nayuki.io/
     // ********************** //
     useEffect(() => {
+        // setPulse(false);
+
         const n = beatTimes.length;
 
         // Coordinates for linear regression
         const x = n - 1;
         const y = beatTimes[n - 1] - beatTimes[0];
 
-        // Reset tempo if times between two taps exceed MAX_TIMELEFT
-        if(beatTimes[x] - beatTimes[x - 1] > MAX_TIMELEFT) {
+        // Reset tempo if times between two taps exceed MAX_TIME
+        if(beatTimes[x] - beatTimes[x - 1] > MAX_TIME) {
             handleReset();
             return;
         }
@@ -79,6 +78,8 @@ const TapTempo:FC = () => {
         ySum  += y;
         yySum += y * y;
         xySum += x * y;
+        
+        setPulse(true);
 
         if (n >= 2) {
             const period = y / x;
@@ -96,11 +97,18 @@ const TapTempo:FC = () => {
     }, [beatTimes]);
 
     return(
-        <>
-            <Screen display={tempo} />
-            <button onClick={e => handleTap(e)} className='btn__buzzer'>BUZZER</button>
-            <button onClick={handleReset} className='btn__reset'>RESET</button>
-        </>
+        <div className={`tap-tempo page`}>
+            <Screen pulse={pulse} display={tempo} />
+            <div className='btn__wrapper'>
+                <div className={`${pulse ? 'pulsar-bottom' : ''} btn__ring btn__ring--down`}></div>
+                <div className={`${pulse ? 'pulsar-up' : ''} btn__ring btn__ring--up`}></div>
+                <button 
+                    onClick={handleTap} 
+                    className={`${pulse ? 'pulsar-buzzer' : ''} btn__buzzer`}>
+                </button>
+                <button onClick={handleReset} className='btn__reset'>RESET</button>
+            </div>
+        </div>
     );
 };
 

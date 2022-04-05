@@ -91,7 +91,7 @@ const Buzzer:FC<BuzzerProps> = ({clickDelegation}) => {
 
     return(
         <>
-            <button onClick={e => handleTap(e)} className='btn__buzzer'>BUZZER</button>
+            <button onClick={e => handleTap(e)} className='btn__buzzer pulsar'>BUZZER</button>
             <button onClick={handleResetClick} className='btn__reset'>RESET</button>
         </>
     );

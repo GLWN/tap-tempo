@@ -6,9 +6,11 @@ import './App.scss'
 const App = () => {
 	return (
 		<div className="GLWN">
-			<Header />
-			<Navigation />
-			<TapTempo />
+			<div className='v-align'>
+				<Header />
+				{/* <Navigation /> */}
+				<TapTempo />
+			</div>
 		</div>
 	);
 }	
