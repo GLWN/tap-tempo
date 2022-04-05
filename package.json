@@ -1,6 +1,7 @@
 {
   "name": "ts-tdd-tap_tempo",
   "version": "0.1.0",
+  "homepage": "https://www.glwn.fr/tap-tempo",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -12,6 +13,7 @@
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
     "react-scripts": "5.0.0",
     "typescript": "^4.6.2",
     "web-vitals": "^2.1.4"
@@ -43,6 +45,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.10.11",
     "@types/react": "^17.0.43",
+    "@types/react-helmet": "^6.1.5",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "enzyme": "^3.11.0"
   }

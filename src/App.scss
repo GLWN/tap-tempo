@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap');
+// font-family: 'Rubik Puddles', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+// font-family: 'Bungee', cursive;
 // font-family: 'Staatliches', cursive;
 // font-family: 'Bebas Neue', cursive;
 // @import url('https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap');
@@ -10,6 +14,7 @@ $color-3: #C5C6C7;
 $color-4: #66FCF1;
 $color-5: #45A29E;
 
+$mediaDesktop : 769px;
 // $buzzerSize: 300px;
 
 * {
@@ -33,8 +38,6 @@ body {
 }
 
 .GLWN {
-	// display: flex;
-	// flex-flow: column;
 	display: table;
 	text-align: center;
 	height: 100%;
@@ -46,25 +49,34 @@ body {
 		height: 100%;
 	}
 	h1 {
-		color: transparent;
-		text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
-		-webkit-background-clip: text;
-		-moz-background-clip: text;
-		background-clip: text;
-		font-family: 'Bebas Neue', cursive;
-		background-color: #565656;
-		// color: #41536b;
+		font-family: 'Bungee', cursive;
+		color: #000;
 		z-index: 10;
 		margin: 0;
 		margin-bottom: 4rem;
-		font-size: 9rem;
+		// letter-spacing: -1px;
+		font-size: 4rem;
 		text-align: center;
+		@media screen and (min-width: $mediaDesktop) {
+			font-family: 'Bebas Neue', cursive;
+			font-size: 9rem;
+			margin-bottom: 4rem;
+			color: transparent;
+			text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+			-webkit-background-clip: text;
+			-moz-background-clip: text;
+			background-clip: text;
+			background-color: #565656;
+		}
 		span {
 			color: #2f3b4c;
-			font-size: 4rem;
-			display: block;
 			line-height: .1rem;
 			margin-left: 19rem;
+			display: none;
+			@media screen and (min-width: $mediaDesktop) {
+				display: block;
+				font-size: 4rem;
+			}
 		}
 	}
 
@@ -92,12 +104,12 @@ body {
 		.screen {
 			font-family: 'Staatliches', cursive;
 			position: absolute;
+			pointer-events: none;
 			z-index: 10;
 			top: 58px;
 			text-align: center;
 			width: 100%;
 			font-size: 14rem;
-			color: $color-4;
 			font-weight: bold;
 			-webkit-touch-callout: none;
 			-webkit-user-select: none;
@@ -105,12 +117,21 @@ body {
 			-moz-user-select: none;
 			-ms-user-select: none;
 			user-select: none;
+			@media screen and (min-width: $mediaDesktop) {
+				color: #000;
+			}
 			span {
+				pointer-events: none;
 				color: #3eddd3;
 				display: block;
 				position: relative;
 				top: -24px;
 				font-size: 12rem;
+			}
+			&.pulsar-screen { // MOBILE ONLY
+				color: $color-4;
+			}
+			@media screen and (min-width: $mediaDesktop) {
 			}
 		}
 	
@@ -118,6 +139,7 @@ body {
 			height: 100%;
 			text-align: center;
 			position: relative;
+			margin-bottom: 40px;
 			.btn__ring {
 				position: absolute;
 				border-radius: 50%;
@@ -162,31 +184,34 @@ body {
 		}
 	}
 
-	.pulsar-bottom, .pulsar-up, .pulsar-buzzer {
-		animation-timing-function: ease-out;
-		animation-direction: alternate;
-		// animation-iteration-count: 1;
-		animation-play-state: running; 
-	}
-	
-	.pulsar-bottom {
-		animation-name: pulsar-bottom;
-		animation-duration: .1s;
-	}
-	.pulsar-up {
-		animation-name: pulsar-up;
-		animation-duration: .2s;
-	}
-	
-	.pulsar-buzzer {
-		animation-name: pulsar-buzzer;
-		animation-duration: .1s;
-	}
+    @media screen and (min-width: $mediaDesktop) {
 
-	.pulsar-screen {
-		animation-name: pulsar-screen;
-		animation-duration: .05s;
-	}
+		.pulsar-bottom, .pulsar-up, .pulsar-buzzer {
+			animation-timing-function: ease-out;
+			animation-direction: alternate;
+			// animation-iteration-count: 1;
+			animation-play-state: running; 
+		}
+		
+		.pulsar-bottom {
+			animation-name: pulsar-bottom;
+			animation-duration: .1s;
+		}
+		.pulsar-up {
+			animation-name: pulsar-up;
+			animation-duration: .2s;
+		}
+		
+		.pulsar-buzzer {
+			animation-name: pulsar-buzzer;
+			animation-duration: .1s;
+		}
+
+		.pulsar-screen {
+			animation-name: pulsar-screen;
+			animation-duration: .05s;
+		}
+    }
 	
 	@keyframes pulsar-bottom {
 		0% {
@@ -211,7 +236,6 @@ body {
 		
 		50% {
 			background-position: 60% 60%;
-			// transform: scale(1.02);
 		}
 		
 		100% { 
@@ -238,7 +262,7 @@ body {
 	@keyframes pulsar-screen {
 		0% {
 			color: $color-4;
-			transform: scale(1);
+			// transform: scale(1);
 		}
 		
 		50% {
@@ -248,7 +272,7 @@ body {
 		
 		100% { 
 			color: $color-4;
-			transform: scale(1);
+			// transform: scale(1);
 		}
 	}
 
