@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap');
+// font-family: 'Rubik Puddles', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+// font-family: 'Bungee', cursive;
+// font-family: 'Staatliches', cursive;
+// font-family: 'Bebas Neue', cursive;
+// @import url('https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap');
+// font-family: 'Rubik Puddles', cursive;
+$color-1: #0B0C10;
+$color-2: #1F2833;
+$color-3: #C5C6C7;
+$color-4: #66FCF1;
+$color-5: #45A29E;
+
+$mediaDesktop : 769px;
+// $buzzerSize: 300px;
+
+* {
+	box-sizing: border-box;
+}
+html, body, #root, .GLWN {
+	height: 100%;
+}
+
+html, body {
+	background-color: $color-2;
+}
+
+html {
+	/* 62.5% of 16px base font size is 10px */
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.6rem; //equivalent to 16px
+}
+
+.GLWN {
+	display: table;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	background:#ccc;
+	.v-align {
+		display: table-cell;
+		vertical-align: middle;
+		height: 100%;
+	}
+	h1 {
+		font-family: 'Bungee', cursive;
+		color: #000;
+		z-index: 10;
+		margin: 0;
+		margin-bottom: 4rem;
+		// letter-spacing: -1px;
+		font-size: 4rem;
+		text-align: center;
+		@media screen and (min-width: $mediaDesktop) {
+			font-family: 'Bebas Neue', cursive;
+			font-size: 9rem;
+			margin-bottom: 4rem;
+			color: transparent;
+			text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+			-webkit-background-clip: text;
+			-moz-background-clip: text;
+			background-clip: text;
+			background-color: #565656;
+		}
+		span {
+			color: #2f3b4c;
+			line-height: .1rem;
+			margin-left: 19rem;
+			display: none;
+			@media screen and (min-width: $mediaDesktop) {
+				display: block;
+				font-size: 4rem;
+			}
+		}
+	}
+
+	.nav {
+		list-style: none;
+		display: flex;
+		padding: 0;
+		justify-content: center;
+	}
+
+	.nav__item {
+		button, &--active button {
+			cursor: pointer;
+			padding: 1rem;
+			font-size: 2rem;
+			color: rgb(141, 141, 141);
+		}
+		&--active button {
+			background: yellow;
+		}
+	}
+
+	.tap-tempo {
+		position: relative;
+		.screen {
+			font-family: 'Staatliches', cursive;
+			position: absolute;
+			pointer-events: none;
+			z-index: 10;
+			top: 58px;
+			text-align: center;
+			width: 100%;
+			font-size: 14rem;
+			font-weight: bold;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			@media screen and (min-width: $mediaDesktop) {
+				color: #000;
+			}
+			span {
+				pointer-events: none;
+				color: #3eddd3;
+				display: block;
+				position: relative;
+				top: -24px;
+				font-size: 12rem;
+			}
+			&.pulsar-screen { // MOBILE ONLY
+				color: $color-4;
+			}
+			@media screen and (min-width: $mediaDesktop) {
+			}
+		}
+	
+		.btn__wrapper {
+			height: 100%;
+			text-align: center;
+			position: relative;
+			margin-bottom: 40px;
+			.btn__ring {
+				position: absolute;
+				border-radius: 50%;
+				left: 50%;
+			}
+			.btn__ring--down {
+				z-index: 1;
+				background: linear-gradient(to right, #ffffff, #b9b9b9, #777777, #3b3b3b, #000000);
+				width: 320px;
+				height: 320px;
+				top: -20px;
+				border: 2px solid #000;
+				margin-left: -160px;
+				filter: drop-shadow(10px 6px 6px rgb(20, 20, 20));
+			}
+			.btn__ring--up {
+				z-index: 2;
+				background: radial-gradient(circle, #ffffff, #b9b9b9, #777777, #3b3b3b, #000000);
+				background-size: 400% 400%;
+				background-position: 20% 30%;
+				width: 300px;
+				height: 300px;
+				top: -10px;
+				margin-left: -150px;
+			}
+			.btn__buzzer {
+				position: relative;
+				z-index: 3;
+				border: 2px solid #000;
+				background: radial-gradient(circle, #45a29e, #77b8c6, #adcde0, #dde4f1, #ffffff);
+				background-size: 400% 400%;
+				background-position: 50% 50%;
+				width: 280px;
+				height: 280px;
+				border-radius: 50%;
+				align-self: center;
+				margin: 0 auto;	
+			}
+			.btn__reset {
+				display: none;
+			}
+		}
+	}
+
+    @media screen and (min-width: $mediaDesktop) {
+
+		.pulsar-bottom, .pulsar-up, .pulsar-buzzer {
+			animation-timing-function: ease-out;
+			animation-direction: alternate;
+			// animation-iteration-count: 1;
+			animation-play-state: running; 
+		}
+		
+		.pulsar-bottom {
+			animation-name: pulsar-bottom;
+			animation-duration: .1s;
+		}
+		.pulsar-up {
+			animation-name: pulsar-up;
+			animation-duration: .2s;
+		}
+		
+		.pulsar-buzzer {
+			animation-name: pulsar-buzzer;
+			animation-duration: .1s;
+		}
+
+		.pulsar-screen {
+			animation-name: pulsar-screen;
+			animation-duration: .05s;
+		}
+    }
+	
+	@keyframes pulsar-bottom {
+		0% {
+			filter: drop-shadow(4px 4px 8px rgb(20, 20, 20));
+		}
+
+		50% {
+			// transform: scale(1);
+			background: #000;
+			filter: drop-shadow(4px 4px 2px rgb(0, 0, 0));
+		}
+
+		100% { 
+			filter: drop-shadow(4px 4px 8px rgb(20, 20, 20));
+		}
+	}
+
+	@keyframes pulsar-up {
+		0% {
+			background-position: 20% 30%;
+		}
+		
+		50% {
+			background-position: 60% 60%;
+		}
+		
+		100% { 
+			background-position: 20% 30%;
+		}
+	}
+
+	@keyframes pulsar-buzzer {
+		0% {
+			background-position: 50% 50%;
+		}
+		
+		50% {
+			background-position: 20% 20%;
+			// background: #000;
+			// transform: scale(1.02);
+		}
+		
+		100% { 
+			background-position: 50% 50%;
+		}
+	}
+
+	@keyframes pulsar-screen {
+		0% {
+			color: $color-4;
+			// transform: scale(1);
+		}
+		
+		50% {
+			color: #000;
+			// transform: scale(1.2);
+		}
+		
+		100% { 
+			color: $color-4;
+			// transform: scale(1);
+		}
+	}
+
+}
